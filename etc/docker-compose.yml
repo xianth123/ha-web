@@ -1,0 +1,15 @@
+robot:
+    image: docker-registry.iguokr.com/apps/battle-robot-app:20180725
+    environment:
+        REDIS_HOST: puzzle-testing.d6pqh2.0001.cnn1.cache.amazonaws.com.cn
+        REDIS_DATABASE: 2
+        DATABASE_URI: postgresql+psycopg2://battle:bbbb@10.22.15.70:5432/robot
+        CONFIG: production
+    working_dir:
+        /app
+    volumes:
+        - ./robot:/app
+    command:
+        bash -c "supervisord -c supervisord.conf"
+    ports:
+        - 9311:8888
